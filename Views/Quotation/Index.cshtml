@@ -26,12 +26,12 @@
 							dataType: "json",
 							type: "get"
 						},
-						create: {
-							url: "Quotation/Create",
-							dataType: "json",
-							contentType: "application/json; charset=utf-8",
-							type: "post"
-						},
+						//create: {
+						//	url: "Quotation/Create",
+						//	dataType: "json",
+						//	contentType: "application/json; charset=utf-8",
+						//	type: "post"
+						//},
 						update: {
 							url: "Quotation/Update",
 							dataType: "json",
@@ -70,14 +70,43 @@
 					}
 				});
 
-				$("#grid").kendoGrid({
+				var grid = $("#grid").kendoGrid({
 					dataSource: dataSource,
 					columnMenu: {
 						filterable: false
 					},
 					height: window.innerHeight - 150,
 					width: window.innerWidth - 25,
-					editable: "inline",
+					editable: true,
+					dataBound: function (e) {
+						$('.k-grid-add').unbind("click");
+
+						$('.k-grid-add').bind("click", function (e) {
+							var grid = $("#grid").data("kendoGrid");
+							if (grid) {
+								var dataSource = grid.dataSource;
+								const quotationItem = dataSource.get(1);
+								if(quotationItem){
+									var newQuotation = {
+										quotationNo: 0,
+										quotationDate: new Date(),
+										customerId: quotationItem.customerId,
+										customerName: quotationItem.customerName,
+										subject: quotationItem.subject,
+										description: quotationItem.description,
+										status: quotationItem.status,
+										value: quotationItem.value,
+										prodCode: quotationItem.prodCode,
+										prodName: quotationItem.prodName,
+										price: quotationItem.price,
+										qty: quotationItem.qty,
+										amount: quotationItem.amount
+									};
+									dataSource.add(newQuotation);
+								}
+							}
+						});
+					},
 					pageable: true,
 					toolbar: ["create", "excel", "pdf", "search"],
 					search: {
@@ -115,7 +144,13 @@
 						{ command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
 					],
 				});
+
+				//$("#addItemButton").click(function () {
+				//	grid.addRow();
+				//});
 			});
+
+
 
 			function dateTimeEditor2(container, options) {
 				$('<input type="text" />')

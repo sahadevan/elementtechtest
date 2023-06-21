@@ -34,8 +34,10 @@ BEGIN
     ELSE
     BEGIN
         -- Insert new quotation
-        INSERT INTO Quotation (QuotationNo, CustomerId, QuotationDate)
-        VALUES (@QuotationNo, @CustomerId, @QuotationDate)
+        INSERT INTO Quotation (CustomerId, QuotationDate)
+        VALUES (@CustomerId, @QuotationDate)
+
+		SET @QuotationNo = SCOPE_IDENTITY()
     END
 
     -- Delete existing quotation details
