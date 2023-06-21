@@ -1,21 +1,26 @@
 CREATE PROCEDURE AddOrUpdateQuotation
-    @QuotationJSON NVARCHAR(MAX)
-AS
-BEGIN
-    DECLARE @QuotationNo BIGINT,
+            @QuotationNo BIGINT,
             @CustomerId varchar(15),
 			@ProdCode varchar(20),
 			@ProdName varchar(150),
 			@Qty numeric(18, 3),
             @QuotationDate DATE
+AS
+BEGIN
+   -- DECLARE @QuotationNo BIGINT,
+   --         @CustomerId varchar(15),
+			--@ProdCode varchar(20),
+			--@ProdName varchar(150),
+			--@Qty numeric(18, 3),
+   --         @QuotationDate DATE
 
-    -- Extract values from JSON
-    SELECT @QuotationNo = JSON_VALUE(@QuotationJSON, '$.QuotationNo'),
-           @CustomerId = JSON_VALUE(@QuotationJSON, '$.CustomerId'),
-           @QuotationDate = JSON_VALUE(@QuotationJSON, '$.QuotationDate'),
-		   @ProdCode = JSON_VALUE(@QuotationJSON, '$.ProdCode'),
-		   @ProdName  = JSON_VALUE(@QuotationJSON, '$.ProdName'),
-		   @Qty  = JSON_VALUE(@QuotationJSON, '$.Qty')
+   -- -- Extract values from JSON
+   -- SELECT @QuotationNo = JSON_VALUE(@QuotationJSON, '$.QuotationNo'),
+   --        @CustomerId = JSON_VALUE(@QuotationJSON, '$.CustomerId'),
+   --        @QuotationDate = JSON_VALUE(@QuotationJSON, '$.QuotationDate'),
+		 --  @ProdCode = JSON_VALUE(@QuotationJSON, '$.ProdCode'),
+		 --  @ProdName  = JSON_VALUE(@QuotationJSON, '$.ProdName'),
+		 --  @Qty  = JSON_VALUE(@QuotationJSON, '$.Qty')
 
     -- Check if the quotation already exists
     IF EXISTS (SELECT 1 FROM Quotation WHERE QuotationNo = @QuotationNo)

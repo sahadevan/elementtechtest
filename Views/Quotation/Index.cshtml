@@ -2,11 +2,23 @@
 @{
 	ViewData["Title"] = "Quotations";
 }
-
-<div id="techtest">
-	<div id="grid"></div>
-	<script>
-		$(document).ready(function () {
+<html>
+<head>
+	<style>
+		html {
+			font-size: 14px;
+			font-family: Arial, Helvetica, sans-serif;
+		}</style>
+	<title></title>
+	<link href="https://kendo.cdn.telerik.com/themes/6.4.0/default/default-main.css" rel="stylesheet" />
+	<script src="https://kendo.cdn.telerik.com/2023.2.606/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2023.2.606/js/kendo.all.min.js"></script>
+</head>
+<body>
+	<div id="techtest">
+		<div id="grid"></div>
+		<script>
+			$(document).ready(function () {
 				dataSource = new kendo.data.DataSource({
 					transport: {
 						read: {
@@ -17,19 +29,19 @@
 						create: {
 							url: "Quotation/Create",
 							dataType: "json",
-						    contentType: "application/json; charset=utf-8",
+							contentType: "application/json; charset=utf-8",
 							type: "post"
 						},
 						update: {
 							url: "Quotation/Update",
 							dataType: "json",
-						    contentType: "application/json; charset=utf-8",
+							contentType: "application/json; charset=utf-8",
 							type: "post",
-						    complete: function (e) { $("#grid").data("kendoGrid").dataSource.read(); }
+							complete: function (e) { $("#grid").data("kendoGrid").dataSource.read(); }
 						},
 						parameterMap: function (options, operation) {
 							if (operation !== "read" && options.models) {
-							return kendo.stringify(options.models)
+								return kendo.stringify(options.models)
 							}
 						}
 					},
@@ -38,28 +50,28 @@
 					autoSync: true,
 					schema: {
 						model: {
-						id: "quotationNo",
-						fields: {
-							quotationNo: { editable: false, nullable: false },
-							quotationDate: { type: "date", editable: true },
-							customerId: { editable: true, nullable: false },
-							customerName: { editable: true, nullable: false },
-							subject: { editable: true, nullable: true },
-							description: { editable: true, nullable: true },
-							status: { editable: true },
-							value: { editable: true },
-							prodCode: { editable: true, nullable: false },
-							prodName: { editable: true, nullable: false },
-							price: { editable: true, nullable: false },
-							qty: { editable: true, nullable: false },
-							amount: { editable: true, nullable: false }
+							id: "quotationNo",
+							fields: {
+								quotationNo: { editable: false, nullable: false },
+								quotationDate: { type: "date", editable: true },
+								customerId: { editable: true, nullable: false },
+								customerName: { editable: true, nullable: false },
+								subject: { editable: true, nullable: true },
+								description: { editable: true, nullable: true },
+								status: { editable: true },
+								value: { editable: true },
+								prodCode: { editable: true, nullable: false },
+								prodName: { editable: true, nullable: false },
+								price: { editable: true, nullable: false },
+								qty: { editable: true, nullable: false },
+								amount: { editable: true, nullable: false }
 							}
 						}
 					}
 				});
 
-			$("#grid").kendoGrid({
-				dataSource: dataSource,
+				$("#grid").kendoGrid({
+					dataSource: dataSource,
 					columnMenu: {
 						filterable: false
 					},
@@ -70,10 +82,10 @@
 					toolbar: ["create", "excel", "pdf", "search"],
 					search: {
 						fields: [
-						{ name: "quotationNo", operator: "eq" },
-						{ name: "price", operator: "gte" },
-						{ name: "customerName", operator: "contains" },
-						{ name: "prodName", operator: "contains" },
+							{ name: "quotationNo", operator: "eq" },
+							{ name: "price", operator: "gte" },
+							{ name: "customerName", operator: "contains" },
+							{ name: "prodName", operator: "contains" },
 						]
 					},
 					pdf: {
@@ -102,111 +114,117 @@
 						{ field: "amount", title: "Amount" },
 						{ command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
 					],
+				});
 			});
-		});
 
-		function dateTimeEditor2(container, options) {
-			$('<input type="text" />')
-				.appendTo(container)
-				.kendoDateTimePicker({
-					format: "MM/dd/yyyy hh:mm",
-					value: kendo.toString(new Date(options.model.quotationDate), 'MM/dd/yyyy hh:mm')
-				});
-		}
+			function dateTimeEditor2(container, options) {
+				$('<input type="text" />')
+					.appendTo(container)
+					.kendoDateTimePicker({
+						format: "MM/dd/yyyy hh:mm",
+						value: kendo.toString(new Date(options.model.quotationDate), 'MM/dd/yyyy hh:mm')
+					});
+			}
 
-		function customerIdEditor(container, options) {
-			$('<input required name="customerId">')
-				.appendTo(container)
-				.kendoDropDownList({
-					dataTextField: "customerId",
-					dataValueField: "customerId",
-					dataSource: {
-						transport: {
-							read: {
-								url: "Customer/Read",
-								dataType: "json",
-								type: "get"
+			function customerIdEditor(container, options) {
+				$('<input required name="customerId">')
+					.appendTo(container)
+					.kendoDropDownList({
+						dataTextField: "customerId",
+						dataValueField: "customerId",
+						dataSource: {
+							transport: {
+								read: {
+									url: "Customer/Read",
+									dataType: "json",
+									type: "get"
+								}
 							}
 						}
-					}				
-				});				
-		}
+					});
+			}
 
-		function customerNameEditor(container, options) {
-			$('<input name="customerName">')
-				.appendTo(container)
-				.kendoDropDownList({
-					dataTextField: "customerName",
-					dataValueField: "customerName",
-					dataSource: {
-						transport: {
-							read: {
-								url: "Customer/Read",
-								dataType: "json",
-								type: "get"
+			function customerNameEditor(container, options) {
+				$('<input name="customerName">')
+					.appendTo(container)
+					.kendoDropDownList({
+						dataTextField: "customerName",
+						dataValueField: "customerName",
+						dataSource: {
+							transport: {
+								read: {
+									url: "Customer/Read",
+									dataType: "json",
+									type: "get"
+								}
 							}
 						}
-					}
-				});
-		}
+					});
+			}
 
-		function productCodeEditor(container, options) {
-			$('<input required name="prodCode">')
-				.appendTo(container)
-				.kendoDropDownList({
-					dataTextField: "prodCode",
-					dataValueField: "prodCode",
-					dataSource: {
-						transport: {
-							read: {
-								url: "Product/Read",
-								dataType: "json",
-								type: "get"
+			function productCodeEditor(container, options) {
+				$('<input required name="prodCode">')
+					.appendTo(container)
+					.kendoDropDownList({
+						dataTextField: "prodCode",
+						dataValueField: "prodCode",
+						dataSource: {
+							transport: {
+								read: {
+									url: "Product/Read",
+									dataType: "json",
+									type: "get"
+								}
 							}
 						}
-					}
-				});
-		}
+					});
+			}
 
-		function productNameEditor(container, options) {
-			$('<input name="prodName">')
-				.appendTo(container)
-				.kendoDropDownList({
-					dataTextField: "prodName",
-					dataValueField: "prodName",
-					dataSource: {
-						transport: {
-							read: {
-								url: "Product/Read",
-								dataType: "json",
-								type: "get"
+			function productNameEditor(container, options) {
+				$('<input name="prodName">')
+					.appendTo(container)
+					.kendoDropDownList({
+						dataTextField: "prodName",
+						dataValueField: "prodName",
+						dataSource: {
+							transport: {
+								read: {
+									url: "Product/Read",
+									dataType: "json",
+									type: "get"
+								}
 							}
 						}
-					}
-				});
-		}
+					});
+			}
 
-		function productPriceEditor(container, options) {
-			$('<input name="price">')
-				.appendTo(container)
-				.kendoDropDownList({
-					dataTextField: "price",
-					dataValueField: "price",
-					dataSource: {
-						transport: {
-							read: {
-								url: "Product/Read",
-								dataType: "json",
-								type: "get"
+			function productPriceEditor(container, options) {
+				$('<input name="price">')
+					.appendTo(container)
+					.kendoDropDownList({
+						dataTextField: "price",
+						dataValueField: "price",
+						dataSource: {
+							transport: {
+								read: {
+									url: "Product/Read",
+									dataType: "json",
+									type: "get"
+								}
 							}
 						}
-					}
-				});
-		}
+					});
+			}
 
-	</script>
+		</script>
 
-	<style type="text/css">
-		.container { float: left !important; }
-	</style>
-</div>
+		<style type="text/css">
+			.container {
+				float: left !important;
+			}
+		</style>
+	</div>
+
+
+</body>
+</html>

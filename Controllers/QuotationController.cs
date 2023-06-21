@@ -1,14 +1,9 @@
 ﻿using ElementMaterialsTechnology.Models;
 using ElementMaterialsTechnology.Service;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using System.ComponentModel;
-using System.Text.Json;
-using Azure.Core;
-using System.Text;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using System.Text;
 
 namespace ElementMaterialsTechnology.Controllers
 {

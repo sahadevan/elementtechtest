@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Sahadevan\\ElementMaterialsTechnology\\ElementMaterialsTechnology.csproj": {}
+    "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj": {}
   },
   "projects": {
-    "C:\\Sahadevan\\ElementMaterialsTechnology\\ElementMaterialsTechnology.csproj": {
+    "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Sahadevan\\ElementMaterialsTechnology\\ElementMaterialsTechnology.csproj",
+        "projectUniqueName": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj",
         "projectName": "ElementMaterialsTechnology",
-        "projectPath": "C:\\Sahadevan\\ElementMaterialsTechnology\\ElementMaterialsTechnology.csproj",
+        "projectPath": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj",
         "packagesPath": "C:\\Users\\sahad\\.nuget\\packages\\",
-        "outputPath": "C:\\Sahadevan\\ElementMaterialsTechnology\\obj\\",
+        "outputPath": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages"
@@ -60,9 +60,9 @@
               "target": "Package",
               "version": "[7.0.7, )"
             },
-            "Telerik.UI.for.AspNet.Mvc5.Trial": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[2023.2.606, )"
+              "version": "[13.0.3, )"
             }
           },
           "imports": [

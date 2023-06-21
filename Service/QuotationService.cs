@@ -1,7 +1,6 @@
 ﻿using ElementMaterialsTechnology.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System.Data;
 
 namespace ElementMaterialsTechnology.Service
@@ -84,8 +83,22 @@ namespace ElementMaterialsTechnology.Service
 			{
 				SqlDataAdapter adapt = new(cmd);
 				adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
-				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationJSON", SqlDbType.NVarChar));
-				adapt.SelectCommand.Parameters["@QuotationJSON"].Value = JsonConvert.SerializeObject(quotation);
+
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationNo", SqlDbType.BigInt));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@CustomerId", SqlDbType.NVarChar));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@ProdCode", SqlDbType.NVarChar));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@ProdName", SqlDbType.NVarChar));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Decimal));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationDate", SqlDbType.Date));
+
+				adapt.SelectCommand.Parameters["@QuotationNo"].Value = quotation.QuotationNo;
+				adapt.SelectCommand.Parameters["@CustomerId"].Value = quotation.CustomerId;				
+				adapt.SelectCommand.Parameters["@ProdCode"].Value = quotation.ProdCode;
+				adapt.SelectCommand.Parameters["@ProdName"].Value = quotation.ProdName;
+				adapt.SelectCommand.Parameters["@Qty"].Value = quotation.Qty;
+				adapt.SelectCommand.Parameters["@QuotationDate"].Value = quotation.QuotationDate;
+
+
 
 				DataTable dt = new();
 				_ = adapt.Fill(dt);
