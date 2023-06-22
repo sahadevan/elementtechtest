@@ -55,16 +55,16 @@
 								quotationNo: { editable: false, nullable: false },
 								quotationDate: { type: "date", editable: true },
 								customerId: { editable: true, nullable: false },
-								customerName: { editable: true, nullable: false },
-								subject: { editable: true, nullable: true },
-								description: { editable: true, nullable: true },
+								customerName: { editable: false, nullable: false },
+								//subject: { editable: true, nullable: true },
+								//description: { editable: true, nullable: true },
 								status: { editable: true },
-								value: { editable: true },
+								value: { editable: false },
 								prodCode: { editable: true, nullable: false },
-								prodName: { editable: true, nullable: false },
-								price: { editable: true, nullable: false },
+								prodName: { editable: false, nullable: false },
+								//price: { editable: true, nullable: false },
 								qty: { editable: true, nullable: false },
-								amount: { editable: true, nullable: false }
+								//amount: { editable: true, nullable: false }
 							}
 						}
 					}
@@ -92,15 +92,15 @@
 										quotationDate: new Date(),
 										customerId: quotationItem.customerId,
 										customerName: quotationItem.customerName,
-										subject: quotationItem.subject,
-										description: quotationItem.description,
+										//subject: quotationItem.subject,
+										//description: quotationItem.description,
 										status: quotationItem.status,
 										value: quotationItem.value,
 										prodCode: quotationItem.prodCode,
 										prodName: quotationItem.prodName,
-										price: quotationItem.price,
+										//price: quotationItem.price,
 										qty: quotationItem.qty,
-										amount: quotationItem.amount
+										//amount: quotationItem.amount
 									};
 									dataSource.add(newQuotation);
 								}
@@ -112,7 +112,7 @@
 					search: {
 						fields: [
 							{ name: "quotationNo", operator: "eq" },
-							{ name: "price", operator: "gte" },
+							//{ name: "price", operator: "gte" },
 							{ name: "customerName", operator: "contains" },
 							{ name: "prodName", operator: "contains" },
 						]
@@ -131,26 +131,20 @@
 						{ field: "quotationNo", title: "Number" },
 						{ field: "quotationDate", title: "Date", template: "#= kendo.toString(quotationDate,'MM/dd/yyyy') #" },
 						{ field: "customerId", title: "Customer Id", editor: customerIdEditor },
-						{ field: "customerName", title: "Customer Name", editor: customerNameEditor },
-						{ field: "subject", title: "Subject" },
-						{ field: "description", title: "Description" },
+						{ field: "customerName", title: "Customer Name" }, //, editor: customerNameEditor
+						//{ field: "subject", title: "Subject" },
+						//{ field: "description", title: "Description" },
 						{ field: "status", title: "Status" },
 						{ field: "value", title: "Value" },
 						{ field: "prodCode", title: "Product Code", editor: productCodeEditor },
-						{ field: "prodName", title: "Product Name", editor: productNameEditor },
-						{ field: "price", title: "Price", editor: productPriceEditor },
+						{ field: "prodName", title: "Product Name" }, // , editor: productNameEditor
+						//{ field: "price", title: "Price", editor: productPriceEditor },
 						{ field: "qty", title: "Quantity" },
-						{ field: "amount", title: "Amount" },
-						{ command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
+						//{ field: "amount", title: "Amount" },
+						//{ command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
 					],
 				});
-
-				//$("#addItemButton").click(function () {
-				//	grid.addRow();
-				//});
 			});
-
-
 
 			function dateTimeEditor2(container, options) {
 				$('<input type="text" />')

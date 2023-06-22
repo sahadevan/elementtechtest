@@ -1,26 +1,12 @@
 CREATE PROCEDURE AddOrUpdateQuotation
-            @QuotationNo BIGINT,
-            @CustomerId varchar(15),
-			@ProdCode varchar(20),
-			@ProdName varchar(150),
-			@Qty numeric(18, 3),
-            @QuotationDate DATE
+                    @QuotationNo BIGINT,
+                    @CustomerId varchar(15),
+			        @ProdCode varchar(20),
+			        @Status varchar(20),
+			        @Qty numeric(18, 3),
+                    @QuotationDate DATE
 AS
 BEGIN
-   -- DECLARE @QuotationNo BIGINT,
-   --         @CustomerId varchar(15),
-			--@ProdCode varchar(20),
-			--@ProdName varchar(150),
-			--@Qty numeric(18, 3),
-   --         @QuotationDate DATE
-
-   -- -- Extract values from JSON
-   -- SELECT @QuotationNo = JSON_VALUE(@QuotationJSON, '$.QuotationNo'),
-   --        @CustomerId = JSON_VALUE(@QuotationJSON, '$.CustomerId'),
-   --        @QuotationDate = JSON_VALUE(@QuotationJSON, '$.QuotationDate'),
-		 --  @ProdCode = JSON_VALUE(@QuotationJSON, '$.ProdCode'),
-		 --  @ProdName  = JSON_VALUE(@QuotationJSON, '$.ProdName'),
-		 --  @Qty  = JSON_VALUE(@QuotationJSON, '$.Qty')
 
     -- Check if the quotation already exists
     IF EXISTS (SELECT 1 FROM Quotation WHERE QuotationNo = @QuotationNo)
@@ -28,14 +14,15 @@ BEGIN
         -- Update existing quotation
         UPDATE Quotation
         SET CustomerId = @CustomerId,
-            QuotationDate = @QuotationDate
+            QuotationDate = @QuotationDate,
+            Status = @Status
         WHERE QuotationNo = @QuotationNo
     END
     ELSE
     BEGIN
         -- Insert new quotation
-        INSERT INTO Quotation (CustomerId, QuotationDate)
-        VALUES (@CustomerId, @QuotationDate)
+        INSERT INTO Quotation (CustomerId, QuotationDate, Status)
+        VALUES (@CustomerId, @QuotationDate, @Status)
 
 		SET @QuotationNo = SCOPE_IDENTITY()
     END
@@ -43,9 +30,19 @@ BEGIN
     -- Delete existing quotation details
     DELETE FROM QuotationDetails WHERE QuotationNo = @QuotationNo
 
+    -- Select Prod Name using Prod Code
+    DECLARE @ProdName varchar(150), @Price numeric(18, 3)
+    SELECT TOP 1 @ProdName = Prod_Name, @Price = Price FROM Products WHERE Prod_Code = @ProdCode
+
     -- Insert new quotation details from JSON
-    INSERT INTO QuotationDetails (QuotationNo, Prod_code, Prod_Name, Qty)
-    VALUES (@QuotationNo, @ProdCode, @ProdName, @Qty)
+    INSERT INTO QuotationDetails (QuotationNo, Prod_code, Prod_Name, Qty, Price, Amount)
+    VALUES (@QuotationNo, @ProdCode, @ProdName, @Qty, @Price, @Price * @Qty)
+
+    -- Update the Quotation Value
+    DECLARE @Value numeric(18, 3)
+    SELECT @Value = SUM(Amount) FROM QuotationDetails WHERE QuotationNo = @QuotationNo
+
+    UPDATE Quotation SET Value = @Value WHERE QuotationNo = @QuotationNo
 
     SELECT
         Q.QuotationNo,

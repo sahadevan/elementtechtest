@@ -87,14 +87,14 @@ namespace ElementMaterialsTechnology.Service
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationNo", SqlDbType.BigInt));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@CustomerId", SqlDbType.NVarChar));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@ProdCode", SqlDbType.NVarChar));
-				adapt.SelectCommand.Parameters.Add(new SqlParameter("@ProdName", SqlDbType.NVarChar));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@Status", SqlDbType.NVarChar));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Decimal));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationDate", SqlDbType.Date));
 
 				adapt.SelectCommand.Parameters["@QuotationNo"].Value = quotation.QuotationNo;
 				adapt.SelectCommand.Parameters["@CustomerId"].Value = quotation.CustomerId;				
 				adapt.SelectCommand.Parameters["@ProdCode"].Value = quotation.ProdCode;
-				adapt.SelectCommand.Parameters["@ProdName"].Value = quotation.ProdName;
+				adapt.SelectCommand.Parameters["@Status"].Value = quotation.Status;
 				adapt.SelectCommand.Parameters["@Qty"].Value = quotation.Qty;
 				adapt.SelectCommand.Parameters["@QuotationDate"].Value = quotation.QuotationDate;
 
