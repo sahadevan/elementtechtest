@@ -1,8 +1,8 @@
-﻿using ElementMaterialsTechnology.Models;
+﻿using ElementMaterialsTechnology.DataAccessLayer.Models;
 
 namespace ElementMaterialsTechnology.Service
 {
-	public abstract class AbstractServiceBase
+    public abstract class AbstractServiceBase
 	{
 		protected readonly TechTestContext _techTestContext;
 

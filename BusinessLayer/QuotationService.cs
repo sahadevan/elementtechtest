@@ -1,11 +1,11 @@
-﻿using ElementMaterialsTechnology.Models;
+﻿using ElementMaterialsTechnology.DataAccessLayer.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace ElementMaterialsTechnology.Service
 {
-	public class QuotationService : AbstractServiceBase, IQuotationService
+    public class QuotationService : AbstractServiceBase, IQuotationService
 	{
 		public QuotationService(TechTestContext techTestContext) : base(techTestContext) { }
 

@@ -1,8 +1,8 @@
-﻿using ElementMaterialsTechnology.Models;
+﻿using ElementMaterialsTechnology.DataAccessLayer.Models;
 
 namespace ElementMaterialsTechnology.Service
 {
-	public interface IQuotationService
+    public interface IQuotationService
 	{
 		public IEnumerable<QuotationViewModel> GetQuotations();
 

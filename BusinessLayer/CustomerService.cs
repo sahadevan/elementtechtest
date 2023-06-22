@@ -1,8 +1,8 @@
-﻿using ElementMaterialsTechnology.Models;
+﻿using ElementMaterialsTechnology.DataAccessLayer.Models;
 
 namespace ElementMaterialsTechnology.Service
 {
-	public class CustomerService : AbstractServiceBase, ICustomerService
+    public class CustomerService : AbstractServiceBase, ICustomerService
 	{
 		public CustomerService(TechTestContext techTestContext) : base(techTestContext)	{ }
 

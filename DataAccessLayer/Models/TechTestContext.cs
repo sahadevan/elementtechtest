@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ElementMaterialsTechnology.Models;
+namespace ElementMaterialsTechnology.DataAccessLayer.Models;
 
 public partial class TechTestContext : DbContext
 {

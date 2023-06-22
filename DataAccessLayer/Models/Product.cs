@@ -1,4 +1,4 @@
-﻿namespace ElementMaterialsTechnology.Models;
+﻿namespace ElementMaterialsTechnology.DataAccessLayer.Models;
 
 public partial class Product
 {

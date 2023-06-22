@@ -1,4 +1,4 @@
-namespace ElementMaterialsTechnology.Models
+namespace ElementMaterialsTechnology.DataAccessLayer.Models
 {
     public class ErrorViewModel
     {

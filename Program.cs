@@ -1,4 +1,4 @@
-using ElementMaterialsTechnology.Models;
+using ElementMaterialsTechnology.DataAccessLayer.Models;
 using ElementMaterialsTechnology.Service;
 using Microsoft.EntityFrameworkCore;
 
