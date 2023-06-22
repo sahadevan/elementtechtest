@@ -53,6 +53,25 @@ namespace ElementMaterialsTechnology.Controllers
 			return _quotationService.GetQuotations();
 		}
 
+		[HttpPost]
+		public async Task<IEnumerable<long>> SearchQuotationsByDate()
+		{
+			var dateRange = JsonConvert.DeserializeObject<QuotationDateRange>(await GetRawBodyAsync(Request));
+
+			var quotationNos = new List<long>();
+
+			try
+			{
+				quotationNos = _quotationService.SearchQuotationsByDate(dateRange.FromDate, dateRange.ToDate).ToList();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+			}
+
+			return quotationNos;
+		}
+
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -77,4 +96,10 @@ namespace ElementMaterialsTechnology.Controllers
 
 		}
     }
+
+	public struct QuotationDateRange
+	{
+		public DateTime? FromDate { get; set; }
+		public DateTime? ToDate { get; set;}
+	}
 }

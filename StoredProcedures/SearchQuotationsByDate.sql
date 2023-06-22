@@ -1,5 +1,4 @@
-CREATE PROCEDURE SearchQuotations
-    @CustomerId INT = NULL,
+CREATE PROCEDURE SearchQuotationsByDate
     @FromDate DATE = NULL,
     @ToDate DATE = NULL
 AS
@@ -14,7 +13,6 @@ BEGIN
     FROM Quotation Q
     INNER JOIN QuotationDetails QD ON Q.QuotationNo = QD.QuotationNo
     WHERE
-        (@CustomerId IS NULL OR Q.CustomerId = @CustomerId) AND
         (@FromDate IS NULL OR Q.QuotationDate >= @FromDate) AND
         (@ToDate IS NULL OR Q.QuotationDate <= @ToDate)
 END

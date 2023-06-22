@@ -10,6 +10,6 @@ namespace ElementMaterialsTechnology.Service
 
 		public IEnumerable<QuotationViewModel> AddQuotation(QuotationViewModel quotation);
 
-		public IEnumerable<QuotationViewModel> SearchQuotations(string customerId, DateTime? fromDate, DateTime? toDate);
+		public IEnumerable<long> SearchQuotationsByDate(DateTime? fromDate, DateTime? toDate);
 	}
 }

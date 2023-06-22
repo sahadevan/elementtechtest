@@ -47,26 +47,30 @@ namespace ElementMaterialsTechnology.Service
 			}
 		}
 
-		public IEnumerable<QuotationViewModel> SearchQuotations(string customerId, DateTime? fromDate, DateTime? toDate)
+		public IEnumerable<long> SearchQuotationsByDate(DateTime? fromDate, DateTime? toDate)
 		{
 			SqlConnection dbConnection = (SqlConnection)_techTestContext.Database.GetDbConnection();
 
-			using (SqlCommand cmd = new("SearchQuotations", dbConnection))
+			using (SqlCommand cmd = new("SearchQuotationsByDate", dbConnection))
 			{
 				SqlDataAdapter adapt = new(cmd);
 				adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
-				adapt.SelectCommand.Parameters.Add(new SqlParameter("@CustomerId", SqlDbType.NVarChar));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@FromDate", SqlDbType.DateTime));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@ToDate", SqlDbType.DateTime));
-				adapt.SelectCommand.Parameters["@CustomerId"].Value = customerId;
 				adapt.SelectCommand.Parameters["@FromDate"].Value = fromDate;
 				adapt.SelectCommand.Parameters["@ToDate"].Value = toDate;
 
-
 				DataTable dt = new();
-				_ = adapt.Fill(dt);
+				var rowCount = adapt.Fill(dt);
+				
+				var quotationNos = new List<long>();
 
-				return Enumerable.Empty<QuotationViewModel>();
+				foreach (DataRow row in dt.Rows)
+				{
+					quotationNos.Add(Convert.ToInt64(row["QuotationNo"]));
+				}
+
+				return quotationNos;
 			}
 		}
 
@@ -97,8 +101,6 @@ namespace ElementMaterialsTechnology.Service
 				adapt.SelectCommand.Parameters["@Status"].Value = quotation.Status;
 				adapt.SelectCommand.Parameters["@Qty"].Value = quotation.Qty;
 				adapt.SelectCommand.Parameters["@QuotationDate"].Value = quotation.QuotationDate;
-
-
 
 				DataTable dt = new();
 				_ = adapt.Fill(dt);

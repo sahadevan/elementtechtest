@@ -15,6 +15,17 @@
 	<script src="https://kendo.cdn.telerik.com/2023.2.606/js/kendo.all.min.js"></script>
 </head>
 <body>
+	<div>
+		<div>
+			<label for="datetimepickerFrom">Search By Quotation Date Range: From </label>
+			<input id="datetimepickerFrom" title="datetimepickerFrom" class="datePicker" />
+			<label for="datetimepickerTo"> To </label>
+			<input id="datetimepickerTo" title="datetimepickerTo" class="datePicker" />
+			<button id="btnSearch">Search</button>
+			<button id="btnClear">Clear Search Filter</button>
+		</div>
+	</div>
+	<br />
 	<div id="techtest">
 		<div id="grid"></div>
 		<script>
@@ -77,6 +88,8 @@
 					},
 					height: window.innerHeight - 150,
 					width: window.innerWidth - 25,
+					serverPaging: true,
+					serverFiltering: true,
 					editable: true,
 					dataBound: function (e) {
 						$('.k-grid-add').unbind("click");
@@ -144,6 +157,28 @@
 						//{ command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
 					],
 				});
+
+				$("#datetimepickerFrom").kendoDateTimePicker({
+					value: new Date(),
+					dateInput: true,
+					startTime: new Date(2023, 1, 3, 8, 30, 0),
+					endTime: new Date(2023, 1, 3, 17, 00, 0)
+				});
+
+				$("#datetimepickerTo").kendoDateTimePicker({
+					value: new Date(),
+					dateInput: true,
+					startTime: new Date(2023, 1, 3, 8, 30, 0),
+					endTime: new Date(2023, 1, 3, 17, 00, 0)
+				});
+
+				$("#btnSearch").kendoButton({
+					click: onSearch
+				});
+
+				$("#btnClear").kendoButton({
+					click: onClear
+				});				
 			});
 
 			function dateTimeEditor2(container, options) {
@@ -245,15 +280,60 @@
 					});
 			}
 
+			function onSearch() {
+				var from = kendo.toString($("#datetimepickerFrom").val(), 'MM/dd/yyyy hh:mm');
+				var to = kendo.toString($("#datetimepickerTo").val(), 'MM/dd/yyyy hh:mm');
+				$.ajax({
+					url: "Quotation/SearchQuotationsByDate",
+					type: "POST",
+					data: JSON.stringify({ 'FromDate': from, 'ToDate': to }),
+					dataType: "json",
+					traditional: true,
+					contentType: "application/json; charset=utf-8",
+					success: function (data) {
+						if(data && data.length > 0)
+						{
+							var grid = $("#grid").data("kendoGrid");
+							if (grid) {
+									grid.dataSource.query({
+										page: 1,
+										pageSize: 20,
+										filter: {
+											logic: "or",
+											filters: [{ 
+												field: "quotationNo", operator: function (item) { return data.includes(item); }
+											}]
+										}
+									});
+							}
+						} else {
+							alert("Unable to find quotations in date range");
+						}
+					},
+					error: function () {
+						alert("An error has occured while searching quotations !!!");
+					}
+				});
+			}
+
+			function onClear() {
+				var grid = $("#grid").data("kendoGrid");
+				if (grid) {
+					grid.dataSource.filter([]);
+				}
+			}
+
 		</script>
 
 		<style type="text/css">
 			.container {
 				float: left !important;
 			}
+
+			.datePicker {
+				width: auto !important;
+			}
 		</style>
 	</div>
-
-
 </body>
 </html>
