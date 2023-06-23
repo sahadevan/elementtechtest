@@ -4,7 +4,8 @@ CREATE PROCEDURE AddOrUpdateQuotation
 			        @ProdCode varchar(20),
 			        @Status varchar(20),
 			        @Qty numeric(18, 3),
-                    @QuotationDate DATE
+                    @QuotationDate DATE,
+                    @QuotationDetailId int
 AS
 BEGIN
 
@@ -28,7 +29,7 @@ BEGIN
     END
 
     -- Delete existing quotation details
-    DELETE FROM QuotationDetails WHERE QuotationNo = @QuotationNo
+    DELETE FROM QuotationDetails WHERE QuotationNo = @QuotationNo AND Id = @QuotationDetailId
 
     -- Select Prod Name using Prod Code
     DECLARE @ProdName varchar(150), @Price numeric(18, 3)

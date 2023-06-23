@@ -94,6 +94,7 @@ namespace ElementMaterialsTechnology.Service
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@Status", SqlDbType.NVarChar));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Decimal));
 				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationDate", SqlDbType.Date));
+				adapt.SelectCommand.Parameters.Add(new SqlParameter("@QuotationDetailId", SqlDbType.Int));
 
 				adapt.SelectCommand.Parameters["@QuotationNo"].Value = quotation.QuotationNo;
 				adapt.SelectCommand.Parameters["@CustomerId"].Value = quotation.CustomerId;				
@@ -101,6 +102,7 @@ namespace ElementMaterialsTechnology.Service
 				adapt.SelectCommand.Parameters["@Status"].Value = quotation.Status;
 				adapt.SelectCommand.Parameters["@Qty"].Value = quotation.Qty;
 				adapt.SelectCommand.Parameters["@QuotationDate"].Value = quotation.QuotationDate;
+				adapt.SelectCommand.Parameters["@QuotationDetailId"].Value = quotation.QuotationDetailId;
 
 				DataTable dt = new();
 				_ = adapt.Fill(dt);
