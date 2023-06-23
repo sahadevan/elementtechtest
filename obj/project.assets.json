@@ -3664,11 +3664,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj",
+      "projectUniqueName": "C:\\Sahadevan\\NewElementTechTestComplete\\elementtechtest\\ElementMaterialsTechnology.csproj",
       "projectName": "ElementMaterialsTechnology",
-      "projectPath": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj",
+      "projectPath": "C:\\Sahadevan\\NewElementTechTestComplete\\elementtechtest\\ElementMaterialsTechnology.csproj",
       "packagesPath": "C:\\Users\\sahad\\.nuget\\packages\\",
-      "outputPath": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\obj\\",
+      "outputPath": "C:\\Sahadevan\\NewElementTechTestComplete\\elementtechtest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages"

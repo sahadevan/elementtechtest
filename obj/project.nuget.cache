@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ombeb8wtUJR8lGxPJCluEy5qXqfvQEuRduAFfMOk2vIruRhch+1Y8JWvxh3qHsIEK7xZQe5+Law3HamIh+vAuQ==",
+  "dgSpecHash": "OyPGDYh4FKiZae0UTgC1jsQ7gs/YXpcA8UDA8r8FYgFBU31CN8y/QxAl5M51cI3okEHGhaY6JBto8wA65YruLw==",
   "success": true,
-  "projectFilePath": "C:\\Sahadevan\\ElementTechTest\\elementtechtest\\ElementMaterialsTechnology.csproj",
+  "projectFilePath": "C:\\Sahadevan\\NewElementTechTestComplete\\elementtechtest\\ElementMaterialsTechnology.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sahad\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\sahad\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

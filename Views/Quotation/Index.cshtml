@@ -86,10 +86,10 @@
 					columnMenu: {
 						filterable: false
 					},
-					height: window.innerHeight - 150,
+					height: window.innerHeight - 300,
 					width: window.innerWidth - 25,
-					serverPaging: true,
-					serverFiltering: true,
+					//serverPaging: true,
+					//serverFiltering: true,
 					editable: true,
 					dataBound: function (e) {
 						$('.k-grid-add').unbind("click");
@@ -115,7 +115,8 @@
 										qty: quotationItem.qty,
 										//amount: quotationItem.amount
 									};
-									dataSource.add(newQuotation);
+									//dataSource.add(newQuotation);
+									dataSource.insert(0, newQuotation);
 								}
 							}
 						});
